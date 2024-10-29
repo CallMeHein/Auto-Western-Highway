@@ -1,12 +1,12 @@
 import pydevd_pycharm
 import system.lib.minescript as ms
-from auto_highway.const import STEP_HEIGHT_MIN
-from auto_highway.down import should_step_down, downward_scaffold, step_down
-from auto_highway.up import should_step_up, upward_scaffold, step_up
-from auto_highway.util import wait_for_chat, get_standing_block, offset_block, goto
+from const import STEP_HEIGHT_MIN
+from down import should_step_down, downward_scaffold, step_down
+from up import should_step_up, upward_scaffold, step_up
+from util import wait_for_chat, get_standing_block, offset_block, goto
 
 
-#pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
+# pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
 
 
 def step(standing_block, below=False, move_after=True):
@@ -44,7 +44,7 @@ def auto_highway():
 
 
 def test():
-    from auto_highway.down import get_down_ray_blocks
+    from down import get_down_ray_blocks
     standing_block = get_standing_block()
     blocks = get_down_ray_blocks(standing_block)
     for block in blocks:

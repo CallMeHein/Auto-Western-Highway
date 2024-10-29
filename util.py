@@ -1,22 +1,19 @@
 import time
 from threading import Thread
-import system.lib.minescript as ms
 
+import const
+import system.lib.minescript as ms
 from system.lib.minescript import EventQueue, EventType
 
 
-
 def execute_command(command):
-    while not stop_other_threads:
+    while not const.STOP_OTHER_THREADS:
         command()
         time.sleep(1)
 
 
 def wait_for_chat(text, command=None):
-    # TODO LOG
-    global stop_other_threads
-    thread = None
-    stop_other_threads = False
+    const.STOP_OTHER_THREADS = False
     with EventQueue() as event_queue:
         event_queue.register_chat_listener()
         if command:
@@ -26,7 +23,7 @@ def wait_for_chat(text, command=None):
             event = event_queue.get()
             if event.type == EventType.CHAT and text.lower() in event.message.lower():
                 ms.echo("Got the message")
-                stop_other_threads = True
+                const.STOP_OTHER_THREADS = True
                 break
             if event.type == EventType.CHAT and "ok canceled" in event.message:
                 return
