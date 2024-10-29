@@ -9,7 +9,7 @@ def step_down(count, starting_block):
     starting_block = offset_block(starting_block, 0, 1, 0)
     for _ in range(count):
         goto(starting_block)
-        ms.chat("#build step_down_2.litematic ~-2 ~-2 -1")
+        ms.chat("#build step_down.litematic ~-2 ~-2 -1")
         starting_block = offset_block(starting_block, -2, -1, 0)
         wait_for_chat("Done building")
 
