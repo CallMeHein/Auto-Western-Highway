@@ -13,6 +13,8 @@ A script to automatically expand the western overworld highway (-X) on 2b2t
 - stand at the end of the highway
 - have the following items in your hotbar:
   - Stone Bricks
+  - Stone Brick Slabs
   - Smooth Stone
+  - Smooth Stone Slabs
   - Dirt
 - use `\auto_highway\main`
