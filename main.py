@@ -6,7 +6,7 @@ from const import STEP_HEIGHT_MIN
 from down import should_step_down, downward_scaffold, step_down
 from settings import setup_settings
 from up import should_step_up, upward_scaffold, step_up
-from util import wait_for_chat, get_standing_block, offset_block, goto
+from util import wait_for_chat, get_standing_block, offset_block, goto, get_player_position
 
 
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
@@ -24,6 +24,8 @@ def step(standing_block, below=False, move_after=True):
 
 def auto_highway():
     setup_settings()
+    x, y, z = get_player_position()
+    goto([x, y, 0])
     while not const.FULL_STOP:
         standing_block = get_standing_block()
         step_up_height = should_step_up(standing_block)
