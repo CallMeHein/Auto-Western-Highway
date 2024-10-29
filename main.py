@@ -1,5 +1,5 @@
+import copy
 import pydevd_pycharm
-
 import const
 import system.lib.minescript as ms
 from const import STEP_HEIGHT_MIN
@@ -12,8 +12,6 @@ from util import wait_for_chat, get_standing_block, offset_block, goto
 
 
 def step(standing_block, below=False, move_after=True):
-    ms.chat("#buildRepeat 0,0,0")
-    ms.chat("#buildRepeatCount 0")
     if below:
         ms.chat("#build step.litematic ~ ~-1 -1")
     else:
@@ -24,23 +22,24 @@ def step(standing_block, below=False, move_after=True):
 
 
 def auto_highway():
+    ms.chat("#buildRepeatCount 0")
+    ms.chat("#buildInLayers true")
+    ms.chat("#layerOrder true")
     while not const.FULL_STOP:
         standing_block = get_standing_block()
         step_up_height = should_step_up(standing_block)
         if step_up_height >= STEP_HEIGHT_MIN:
             upward_scaffold(step_up_height)
             goto(offset_block(standing_block, 0, 1, 0))
-            step_up(step_up_height)
+            step_up(step_up_height, copy.copy(standing_block))
             goto(offset_block(standing_block, -2 * step_up_height, step_up_height + 1, 0))
             continue
         step_down_height = should_step_down(standing_block)
         if step_down_height >= STEP_HEIGHT_MIN:
             downward_scaffold(step_down_height)
             goto(offset_block(standing_block, 0, 1, 0))
-            step(offset_block(standing_block, 0, 1, 0), True, False)
-            step_down(step_down_height)
+            step_down(step_down_height, copy.copy(standing_block))
             goto(offset_block(standing_block, -2 * step_down_height, -step_down_height + 1, 0))
-            step(offset_block(standing_block, -2 * step_down_height, -step_down_height + 1, 0), True)
             continue
         step(standing_block)
 

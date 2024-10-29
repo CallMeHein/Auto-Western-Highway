@@ -2,18 +2,16 @@ import copy
 
 import system.lib.minescript as ms
 from const import MAX_RAY_STEPS, isIgnorableBlock
-from util import wait_for_chat
+from util import wait_for_chat, offset_block, goto
 
 
-
-def step_up(count):
-    ms.chat("#buildRepeat -2,1,0")
-    ms.chat(f"#buildRepeatCount {count}")
-    ms.chat("#build step_up.litematic ~-2 ~ -1")
-    wait_for_chat("Done building")
-
-    ms.chat("#buildRepeat 0,0,0")
-    ms.chat("#buildRepeatCount 0")
+def step_up(count, starting_block):
+    starting_block = offset_block(starting_block, 0, 1, 0)
+    for _ in range(count):
+        goto(starting_block)
+        ms.chat("#build step_up.litematic ~-2 ~ -1")
+        starting_block = offset_block(starting_block, -2, 1, 0)
+        wait_for_chat("Done building")
 
 
 def upward_scaffold(count):
