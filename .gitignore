@@ -1,0 +1,10 @@
+**
+
+!.gitignore
+
+!minescript/
+!minescript/auto_highway
+!minescript/auto_highway/**
+
+!schematics/
+!schematics/**
