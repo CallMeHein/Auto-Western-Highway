@@ -1,4 +1,6 @@
 import pydevd_pycharm
+
+import const
 import system.lib.minescript as ms
 from const import STEP_HEIGHT_MIN
 from down import should_step_down, downward_scaffold, step_down
@@ -22,7 +24,7 @@ def step(standing_block, below=False, move_after=True):
 
 
 def auto_highway():
-    while True:
+    while not const.FULL_STOP:
         standing_block = get_standing_block()
         step_up_height = should_step_up(standing_block)
         if step_up_height >= STEP_HEIGHT_MIN:
@@ -41,14 +43,6 @@ def auto_highway():
             step(offset_block(standing_block, -2 * step_down_height, -step_down_height + 1, 0), True)
             continue
         step(standing_block)
-
-
-def test():
-    from down import get_down_ray_blocks
-    standing_block = get_standing_block()
-    blocks = get_down_ray_blocks(standing_block)
-    for block in blocks:
-        ms.execute(f"/setblock {block[0]} {block[1]} {block[2]} gold_block")
 
 
 if __name__ == "__main__":

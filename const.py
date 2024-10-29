@@ -1,9 +1,14 @@
 STOP_OTHER_THREADS = False
+FULL_STOP = False
 MAX_RAY_STEPS = 20
 STEP_HEIGHT_MIN = 1
 
 
 def isIgnorableBlock(block):
+    """
+    :param block: name of the block to be checked
+    :return: whether the block should be ignored during ray-casting
+    """
     name = block[10:]
     if any([
         name == "air",
