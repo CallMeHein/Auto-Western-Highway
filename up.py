@@ -1,8 +1,8 @@
 import copy
 
 import system.lib.minescript as ms
-from auto_highway.const import MAX_RAY_STEPS, isIgnorableBlock
-from auto_highway.util import wait_for_chat
+from const import MAX_RAY_STEPS, isIgnorableBlock
+from util import wait_for_chat
 
 
 
