@@ -12,7 +12,7 @@ A script to automatically expand the western overworld highway (-X) on 2b2t
 
 - move this `auto_highway` folder to your `minescript` folder (default: `.minecraft/minescript`)
 - move the schematics to your `schematics` folder (default: `.minecraft/schematics`)
-- copy the line(s) from `settings_override.txt` and replace or add them in your baritone settings file (default: `.minecraft/baritone.settings.txt`)
+- copy the line(s) from `settings_override.txt` and replace or add them in your baritone settings file (default: `.minecraft/baritone/settings.txt`)
 
 ### In-Game
 
