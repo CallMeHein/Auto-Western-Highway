@@ -1,25 +1,26 @@
 import copy
 import const
-import system.lib.minescript as ms
-from annotations import XYZ
 from const import STEP_HEIGHT_MIN
 from down import get_step_down_height, downward_scaffold, step_down
 from settings import setup_settings
+from types import XYZ
 from up import get_step_up_height, upward_scaffold, step_up
+from utils.baritone_build import baritone_build
 from utils.get_player_position import get_player_position
 from utils.get_standing_block import get_standing_block
 from utils.goto import goto
 from utils.offset_block import offset_block
-from utils.wait_for_chat import wait_for_chat
 
 # import pydevd_pycharm
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
 
 
-def step(standing_block: XYZ) -> None:
-    ms.chat("#build step.litematic ~-1 ~-1 -1")
-    wait_for_chat("Done building")
-    goto(offset_block(standing_block, -1, 1, 0))
+def step(starting_block: XYZ, count=1) -> None:
+    starting_block = offset_block(starting_block, 0, 1, 0)
+    for _ in range(count):
+        goto(starting_block)
+        baritone_build("step", ["~-1", "~-1", "-1"])
+        starting_block = offset_block(starting_block, -1, 0, 0)
 
 
 def auto_highway() -> None:
@@ -42,7 +43,7 @@ def auto_highway() -> None:
             step_down(step_down_height, copy.copy(standing_block))
             goto(offset_block(standing_block, -2 * step_down_height, -step_down_height + 1, 0))
             continue
-        step(standing_block)
+        step(copy.copy(standing_block))
 
 
 if __name__ == "__main__":

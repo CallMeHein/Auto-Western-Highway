@@ -1,5 +1,5 @@
 import system.lib.minescript as ms
-from annotations import XYZ
+from types import XYZ
 
 
 def get_player_position() -> XYZ:

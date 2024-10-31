@@ -2,29 +2,27 @@ import copy
 from typing import List
 
 import system.lib.minescript as ms
-from annotations import XYZ
 from const import MAX_RAY_STEPS
+from types import XYZ
+from utils.baritone_build import baritone_build
 from utils.goto import goto
 from utils.is_ignorable_block import is_ignorable_block
 from utils.offset_block import offset_block
-from utils.wait_for_chat import wait_for_chat
 
 
 def step_down(count: int, starting_block: XYZ) -> None:
     starting_block = offset_block(starting_block, 0, 1, 0)
     for _ in range(count):
         goto(starting_block)
-        ms.chat("#build step_down.litematic ~-2 ~-2 -1")
         starting_block = offset_block(starting_block, -2, -1, 0)
-        wait_for_chat("Done building")
+        baritone_build("step_down", ["~-2", "~-2", "-1"])
 
 
 def downward_scaffold(count: int) -> None:
     ms.chat("#buildIgnoreExisting false")
     ms.chat("#buildRepeat 2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
-    ms.chat(f"#build step_scaffold.litematic ~-{2 * count} ~-{count} 0")
-    wait_for_chat("Done building")
+    baritone_build("step_scaffold", [f"~-{2 * count}", f"~-{count}" "0"])
 
     ms.chat("#buildRepeat 0,0,0")
     ms.chat("#buildRepeatCount 0")
