@@ -24,3 +24,16 @@ A script to automatically expand the western overworld highway (-X) on 2b2t
   - Smooth Stone Slabs
   - Dirt
 - use `\auto_highway\main`
+
+## Debugging
+
+### PyCharm
+
+- Run > Edit Configurations...
+- \+ (Add New Configuration) > Python Debug Server
+  - IDE host name: `localhost`
+  - Port: `5678`
+- Uncomment the `pydevd_pycharm.settrace` and corresponding import in `main.py`
+- Run the debugger (Run > Debug)
+- Run the script in-game
+- It will now break on any set breakpoints

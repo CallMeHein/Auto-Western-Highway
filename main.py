@@ -1,5 +1,4 @@
 import copy
-import pydevd_pycharm
 import const
 import system.lib.minescript as ms
 from annotations import XYZ
@@ -13,7 +12,7 @@ from utils.goto import goto
 from utils.offset_block import offset_block
 from utils.wait_for_chat import wait_for_chat
 
-
+# import pydevd_pycharm
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
 
 
