@@ -2,9 +2,9 @@ import copy
 from typing import List
 
 import system.lib.minescript as ms
-from const import MAX_RAY_STEPS
+from const import MAX_RAY_STEPS, FUTURE_STEPS_PER_HEIGHT
 from utils.reset_settings import reset_settings
-from types import XYZ
+from type_annotations import XYZ
 from utils.baritone_build import baritone_build
 from utils.goto import goto
 from utils.is_ignorable_block import is_ignorable_block
@@ -23,7 +23,7 @@ def downward_scaffold(count: int) -> None:
     ms.chat("#buildIgnoreExisting false")
     ms.chat("#buildRepeat 2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
-    baritone_build("step_scaffold", [f"~-{2 * count}", f"~-{count}" "0"])
+    baritone_build("step_scaffold", [f"~-{2 * count}", f"~-{count}", "0"])
     reset_settings()
 
 
@@ -43,6 +43,16 @@ def get_step_down_height(standing_block: XYZ) -> int:
         else:
             break
     return step_down_height
+
+
+def get_future_step_down_length(standing_block: XYZ, step_up_height: int) -> int:
+    step_up_block = offset_block(copy.copy(standing_block), -2 * step_up_height, step_up_height, 0)
+    for future_step in range(FUTURE_STEPS_PER_HEIGHT * step_up_height):
+        future_block = offset_block(step_up_block, -future_step, 0, 0)
+        future_step_down_height = get_step_down_height(future_block)
+        if future_step_down_height >= step_up_height:
+            return 4 * step_up_height + future_step
+    return 0
 
 
 def get_down_ray_blocks(standing_block: XYZ) -> List[XYZ]:

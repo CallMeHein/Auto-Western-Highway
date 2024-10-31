@@ -1,4 +1,4 @@
-from types import RelativeXYZ
+from type_annotations import RelativeXYZ
 from utils.async_baritone_command import async_baritone_command
 from utils.wait_for_chat import wait_for_chat
 

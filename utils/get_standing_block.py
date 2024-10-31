@@ -1,4 +1,4 @@
-from types import XYZ
+from type_annotations import XYZ
 from utils.get_player_position import get_player_position
 
 

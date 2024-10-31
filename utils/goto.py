@@ -1,5 +1,5 @@
 import system.lib.minescript as ms
-from types import XYZ
+from type_annotations import XYZ
 from utils.async_baritone_command import async_baritone_command
 from utils.get_player_position import get_player_position
 from utils.wait_for_chat import wait_for_chat

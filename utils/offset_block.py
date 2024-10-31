@@ -1,4 +1,4 @@
-from types import XYZ
+from type_annotations import XYZ
 
 
 def offset_block(block: XYZ, x_off: int, y_off: int, z_off: int) -> XYZ:
