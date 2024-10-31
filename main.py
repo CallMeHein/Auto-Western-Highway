@@ -17,14 +17,10 @@ from utils.wait_for_chat import wait_for_chat
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
 
 
-def step(standing_block: XYZ, below: bool = False, move_after: bool = True) -> None:
-    if below:
-        ms.chat("#build step.litematic ~ ~-1 -1")
-    else:
-        ms.chat("#build step.litematic ~-1 ~-1 -1")
+def step(standing_block: XYZ) -> None:
+    ms.chat("#build step.litematic ~-1 ~-1 -1")
     wait_for_chat("Done building")
-    if move_after:
-        goto(offset_block(standing_block, -1, 1, 0))
+    goto(offset_block(standing_block, -1, 1, 0))
 
 
 def auto_highway() -> None:
