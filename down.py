@@ -3,6 +3,7 @@ from typing import List
 
 import system.lib.minescript as ms
 from const import MAX_RAY_STEPS
+from utils.reset_settings import reset_settings
 from types import XYZ
 from utils.baritone_build import baritone_build
 from utils.goto import goto
@@ -23,9 +24,7 @@ def downward_scaffold(count: int) -> None:
     ms.chat("#buildRepeat 2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
     baritone_build("step_scaffold", [f"~-{2 * count}", f"~-{count}" "0"])
-
-    ms.chat("#buildRepeat 0,0,0")
-    ms.chat("#buildRepeatCount 0")
+    reset_settings()
 
 
 def get_step_down_height(standing_block: XYZ) -> int:

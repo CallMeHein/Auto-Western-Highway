@@ -2,7 +2,7 @@ import copy
 import const
 from const import STEP_HEIGHT_MIN
 from down import get_step_down_height, downward_scaffold, step_down
-from settings import setup_settings
+from utils.reset_settings import reset_settings
 from types import XYZ
 from up import get_step_up_height, upward_scaffold, step_up
 from utils.baritone_build import baritone_build
@@ -24,7 +24,7 @@ def step(starting_block: XYZ, count=1) -> None:
 
 
 def auto_highway() -> None:
-    setup_settings()
+    reset_settings()
     x, y, z = get_player_position()
     goto([x, y, 0])
     while not const.FULL_STOP:
