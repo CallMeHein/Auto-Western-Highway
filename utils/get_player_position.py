@@ -1,7 +1,8 @@
 import system.lib.minescript as ms
+from annotations import XYZ
 
 
-def get_player_position():
+def get_player_position() -> XYZ:
     """
     :return: [x, y, z] of the player's feet
     """

@@ -1,10 +1,11 @@
 import time
 import system.lib.minescript as ms
+from annotations import XYZ
 from utils.get_player_position import get_player_position
 from utils.wait_for_chat import wait_for_chat
 
 
-def goto(position):
+def goto(position: XYZ) -> None:
     """
     Move to the provided position using Baritone's goto function
     :param position: target [x, y, z]

@@ -1,17 +1,18 @@
 import time
 from threading import Thread
+from typing import Callable
 
 import const
 from system.lib.minescript import EventQueue, EventType
 
 
-def __execute_command(command, poll_rate):
+def __execute_command(command: Callable, poll_rate: float) -> None:
     while not const.STOP_OTHER_THREADS:
         command()
         time.sleep(poll_rate)
 
 
-def wait_for_chat(text, command=None, command_polling_rate=1.0):
+def wait_for_chat(text: str, command: Callable = None, command_polling_rate: float = 1.0) -> None:
     """
     Await a message containing a certain string in chat. Optionally execute a command while waiting.
     :param text: the message content to be awaited

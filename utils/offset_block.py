@@ -1,4 +1,7 @@
-def offset_block(block, x_off, y_off, z_off):
+from annotations import XYZ
+
+
+def offset_block(block: XYZ, x_off: int, y_off: int, z_off: int) -> XYZ:
     """
     :return: [x, y, z] of block, offset by x_off, y_off, z_off
     """

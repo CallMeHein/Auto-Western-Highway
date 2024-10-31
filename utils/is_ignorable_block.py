@@ -10,13 +10,13 @@ __partial_block_names = [
 ]
 
 
-def __check_more_specific_conditions(name):
+def __check_more_specific_conditions(name: str) -> object:
     return any([
         (name.startswith("snow") and "block" not in name),
     ])
 
 
-def is_ignorable_block(block):
+def is_ignorable_block(block: str) -> bool:
     """
     :param block: name of the block to be checked
     :return: whether the block should be ignored during ray-casting

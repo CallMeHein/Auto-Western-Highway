@@ -1,6 +1,8 @@
 import copy
+from typing import List
 
 import system.lib.minescript as ms
+from annotations import XYZ
 from const import MAX_RAY_STEPS
 from utils.goto import goto
 from utils.is_ignorable_block import is_ignorable_block
@@ -8,7 +10,7 @@ from utils.offset_block import offset_block
 from utils.wait_for_chat import wait_for_chat
 
 
-def step_up(count, starting_block):
+def step_up(count: int, starting_block: XYZ) -> None:
     starting_block = offset_block(starting_block, 0, 1, 0)
     for _ in range(count):
         goto(starting_block)
@@ -17,7 +19,7 @@ def step_up(count, starting_block):
         wait_for_chat("Done building")
 
 
-def upward_scaffold(count):
+def upward_scaffold(count: int) -> None:
     ms.chat("#buildIgnoreExisting false")
     ms.chat("#buildRepeat -2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
@@ -28,7 +30,7 @@ def upward_scaffold(count):
     ms.chat("#buildRepeatCount 0")
 
 
-def should_step_up(standing_block):
+def get_step_up_height(standing_block: XYZ) -> int:
     ray_up_blocks = ms.getblocklist(get_up_ray_blocks(standing_block))
     if all([is_ignorable_block(block) for block in ray_up_blocks]):
         return 0
@@ -46,7 +48,7 @@ def should_step_up(standing_block):
     return step_up_height
 
 
-def get_up_ray_blocks(standing_block):
+def get_up_ray_blocks(standing_block: XYZ) -> List[XYZ]:
     blocks = [standing_block]
     for _ in range(MAX_RAY_STEPS):
         step_start_pos = copy.copy(blocks[-1])
