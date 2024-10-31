@@ -6,7 +6,11 @@ from const import STEP_HEIGHT_MIN
 from down import should_step_down, downward_scaffold, step_down
 from settings import setup_settings
 from up import should_step_up, upward_scaffold, step_up
-from util import wait_for_chat, get_standing_block, offset_block, goto, get_player_position
+from utils.get_player_position import get_player_position
+from utils.get_standing_block import get_standing_block
+from utils.goto import goto
+from utils.offset_block import offset_block
+from utils.wait_for_chat import wait_for_chat
 
 
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)

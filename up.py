@@ -1,8 +1,11 @@
 import copy
 
 import system.lib.minescript as ms
-from const import MAX_RAY_STEPS, isIgnorableBlock
-from util import wait_for_chat, offset_block, goto
+from const import MAX_RAY_STEPS
+from utils.goto import goto
+from utils.is_ignorable_block import is_ignorable_block
+from utils.offset_block import offset_block
+from utils.wait_for_chat import wait_for_chat
 
 
 def step_up(count, starting_block):
@@ -27,7 +30,7 @@ def upward_scaffold(count):
 
 def should_step_up(standing_block):
     ray_up_blocks = ms.getblocklist(get_up_ray_blocks(standing_block))
-    if all([isIgnorableBlock(block) for block in ray_up_blocks]):
+    if all([is_ignorable_block(block) for block in ray_up_blocks]):
         return 0
     step_up_height = 1
     for step_count in range(MAX_RAY_STEPS):
@@ -36,7 +39,7 @@ def should_step_up(standing_block):
             ray_up_blocks[step_count * 3 + 1],
             ray_up_blocks[step_count * 3 + 2],
         ]
-        if all([isIgnorableBlock(block) for block in blocks]):
+        if all([is_ignorable_block(block) for block in blocks]):
             step_up_height += 1
         else:
             break

@@ -1,8 +1,11 @@
 import copy
 
 import system.lib.minescript as ms
-from const import MAX_RAY_STEPS, isIgnorableBlock
-from util import wait_for_chat, offset_block, goto
+from const import MAX_RAY_STEPS
+from utils.goto import goto
+from utils.is_ignorable_block import is_ignorable_block
+from utils.offset_block import offset_block
+from utils.wait_for_chat import wait_for_chat
 
 
 def step_down(count, starting_block):
@@ -34,14 +37,13 @@ def should_step_down(standing_block):
             ray_up_blocks[step_count * 3 + 1],
             ray_up_blocks[step_count * 3 + 2],
         ]
-        if step_count == 0 and isIgnorableBlock(blocks[1]) and isIgnorableBlock(blocks[2]):
+        if step_count == 0 and is_ignorable_block(blocks[1]) and is_ignorable_block(blocks[2]):
             step_down_height += 1
-        elif all([isIgnorableBlock(block) for block in blocks]):
+        elif all([is_ignorable_block(block) for block in blocks]):
             step_down_height += 1
         else:
             break
     return step_down_height
-
 
 
 def get_down_ray_blocks(standing_block):
