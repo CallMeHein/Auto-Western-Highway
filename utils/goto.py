@@ -1,3 +1,4 @@
+import time
 import system.lib.minescript as ms
 from type_annotations import XYZ
 from utils.async_baritone_command import async_baritone_command
@@ -16,3 +17,4 @@ def goto(position: XYZ) -> None:
         ms.echo(get_player_position())
         async_baritone_command(f"#goto {position[0]} {position[1]} {position[2]}")
         wait_for_chat("No process in control", lambda: ms.chat("#proc"))
+        time.sleep(0.25)

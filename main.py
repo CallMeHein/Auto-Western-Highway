@@ -57,3 +57,4 @@ def auto_highway() -> None:
 
 if __name__ == "__main__":
     auto_highway()
+    print("Done")

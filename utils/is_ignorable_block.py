@@ -1,4 +1,5 @@
 __partial_block_names = [
+    "air",
     "vine",
     "obsidian",
     "nether",
@@ -23,7 +24,7 @@ def is_ignorable_block(block: str) -> bool:
     """
     name = block[10:]  # remove the "minecraft:" in front of the block's name
     if any([
-        name in ["air", "lily_pad"],
+        name in ["lily_pad"],
         any([partialBlockName in name for partialBlockName in __partial_block_names]),
         __check_more_specific_conditions(name)
     ]):
