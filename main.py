@@ -2,6 +2,7 @@ import copy
 import const
 from const import STEP_HEIGHT_MIN
 from down import get_step_down_height, downward_scaffold, step_down, get_future_step_down_length
+from logger import logger
 from utils.reset_settings import reset_settings
 from type_annotations import XYZ
 from up import get_step_up_height, upward_scaffold, step_up, get_future_step_up_length
@@ -16,6 +17,7 @@ from utils.offset_block import offset_block
 
 
 def step(starting_block: XYZ, count=1) -> None:
+    logger.write_log(f"step: {count}")
     starting_block = offset_block(starting_block, 0, 1, 0)
     for _ in range(count):
         goto(starting_block)

@@ -3,6 +3,7 @@ from typing import List
 
 import system.lib.minescript as ms
 from const import MAX_RAY_STEPS, FUTURE_STEPS
+from logger import logger
 from utils.is_snow import is_snow
 from utils.reset_settings import reset_settings
 from type_annotations import XYZ
@@ -13,6 +14,7 @@ from utils.offset_block import offset_block
 
 
 def step_up(count: int, starting_block: XYZ) -> None:
+    logger.write_log(f"step_up: {count}")
     starting_block = offset_block(starting_block, 0, 1, 0)
     for _ in range(count):
         goto(starting_block)
@@ -21,6 +23,7 @@ def step_up(count: int, starting_block: XYZ) -> None:
 
 
 def upward_scaffold(count: int, contains_snow: bool) -> None:
+    logger.write_log(f"scaffold_up: {count}")
     ms.chat(f"#buildIgnoreExisting {str(not contains_snow).lower()}")
     ms.chat("#buildRepeat -2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
