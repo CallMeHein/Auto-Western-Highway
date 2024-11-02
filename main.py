@@ -30,24 +30,24 @@ def auto_highway() -> None:
     goto([x, y, 0])
     while not const.FULL_STOP:
         standing_block = get_standing_block()
-        step_up_height = get_step_up_height(standing_block)
+        step_up_height, contains_snow = get_step_up_height(standing_block)
         if step_up_height >= STEP_HEIGHT_MIN:
             future_step_down_length = get_future_step_down_length(standing_block, step_up_height)
             if future_step_down_length:
                 step(standing_block, future_step_down_length)
                 continue
-            upward_scaffold(step_up_height)
+            upward_scaffold(step_up_height, contains_snow)
             goto(offset_block(standing_block, 0, 1, 0))
             step_up(step_up_height, copy.copy(standing_block))
             goto(offset_block(standing_block, -2 * step_up_height, step_up_height + 1, 0))
             continue
-        step_down_height = get_step_down_height(standing_block)
+        step_down_height, contains_snow = get_step_down_height(standing_block)
         if step_down_height >= STEP_HEIGHT_MIN:
-            future_step_up_length = get_future_step_up_length(standing_block, step_down_height)
+            future_step_up_length, _ = get_future_step_up_length(standing_block, step_down_height)
             if future_step_up_length:
                 step(standing_block, future_step_up_length)
                 continue
-            downward_scaffold(step_down_height)
+            downward_scaffold(step_down_height, contains_snow)
             goto(offset_block(standing_block, 0, 1, 0))
             step_down(step_down_height, copy.copy(standing_block))
             goto(offset_block(standing_block, -2 * step_down_height, -step_down_height + 1, 0))

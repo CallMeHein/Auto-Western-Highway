@@ -2,7 +2,8 @@ import copy
 from typing import List
 
 import system.lib.minescript as ms
-from const import MAX_RAY_STEPS, FUTURE_STEPS_PER_HEIGHT
+from const import MAX_RAY_STEPS, FUTURE_STEPS
+from utils.is_snow import is_snow
 from utils.reset_settings import reset_settings
 from type_annotations import XYZ
 from utils.baritone_build import baritone_build
@@ -19,18 +20,19 @@ def step_up(count: int, starting_block: XYZ) -> None:
         baritone_build("step_up", ["~-2", "~", "-1"])
 
 
-def upward_scaffold(count: int) -> None:
-    ms.chat("#buildIgnoreExisting false")
+def upward_scaffold(count: int, contains_snow: bool) -> None:
+    ms.chat(f"#buildIgnoreExisting {str(not contains_snow).lower()}")
     ms.chat("#buildRepeat -2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
     baritone_build("step_scaffold", ["~-3", "~", "0"])
     reset_settings()
 
 
-def get_step_up_height(standing_block: XYZ) -> int:
+def get_step_up_height(standing_block: XYZ) -> tuple[int, bool]:
     ray_up_blocks = ms.getblocklist(get_up_ray_blocks(standing_block))
+    contains_snow = any([is_snow(block) for block in ray_up_blocks])
     if all([is_ignorable_block(block) for block in ray_up_blocks]):
-        return 0
+        return 0, False
     step_up_height = 1
     for step_count in range(MAX_RAY_STEPS):
         blocks = [
@@ -42,14 +44,14 @@ def get_step_up_height(standing_block: XYZ) -> int:
             step_up_height += 1
         else:
             break
-    return step_up_height
+    return step_up_height, contains_snow
 
 
 def get_future_step_up_length(standing_block: XYZ, step_down_height: int) -> int:
     step_up_block = offset_block(copy.copy(standing_block), -2 * step_down_height, -step_down_height, 0)
-    for future_step in range(FUTURE_STEPS_PER_HEIGHT * step_down_height):
+    for future_step in range(FUTURE_STEPS):
         future_block = offset_block(step_up_block, -future_step, 0, 0)
-        future_step_down_height = get_step_up_height(future_block)
+        future_step_down_height, _ = get_step_up_height(future_block)
         if future_step_down_height >= step_down_height:
             return 4 * step_down_height + future_step
     return 0
