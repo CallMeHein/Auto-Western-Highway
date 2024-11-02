@@ -2,6 +2,10 @@
 
 A script to automatically expand the western overworld highway (-X) on 2b2t
 
+# Disclaimer
+
+This is still a WIP and should not be used without supervision. Baritone likes to get stuck and the script does not always make correct decisions yet. Manual interference is sometimes needed.
+
 ## Prerequisites
 - [Baritone](https://github.com/cabaletta/baritone)
 - [Minescript](https://github.com/maxuser0/minescript)
@@ -37,3 +41,9 @@ A script to automatically expand the western overworld highway (-X) on 2b2t
 - Run the debugger (Run > Debug)
 - Run the script in-game
 - It will now break on any set breakpoints
+
+## TODOs
+
+- separate terminal window to log this script's decisions. The in-game chat is currently useless because of the flood of Baritone's logs.
+  - allow the user to write commands which will be executed in the in-game chat? Depending on client/active modules, you may not have full control over the in-game chat.
+- no longer depend on #goto and #build with relative coordinates. Instead, keep track of the latest highway coordinates and work with those. Should reduce Baritone getting stuck
