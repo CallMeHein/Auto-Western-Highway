@@ -7,3 +7,4 @@ def reset_settings() -> None:
     ms.chat("#buildInLayers true")
     ms.chat("#layerOrder true")
     ms.chat("#buildIgnoreExisting false")
+    ms.chat("#blocksToDisallowBreaking stone_bricks,stone_brick_slab,smooth_stone,smooth_stone_slab")
