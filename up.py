@@ -8,26 +8,25 @@ from utils.is_snow import is_snow
 from utils.reset_settings import reset_settings
 from type_annotations import XYZ
 from utils.baritone_build import baritone_build
-from utils.goto import goto
 from utils.is_ignorable_block import is_ignorable_block
 from utils.offset_block import offset_block
 
 
-def step_up(count: int, starting_block: XYZ) -> None:
+def step_up(count: int, build_origin: XYZ) -> XYZ:
     logger.write_log(f"step_up: {count}")
-    starting_block = offset_block(starting_block, 0, 1, 0)
+    build_origin = offset_block(build_origin, 0, 1, 0)
     for _ in range(count):
-        goto(starting_block)
-        starting_block = offset_block(starting_block, -2, 1, 0)
-        baritone_build("step_up", ["~-2", "~", "-1"])
+        baritone_build("step_up", offset_block(build_origin, -2, 0, -1))
+        build_origin = offset_block(build_origin, -2, 1, 0)
+    return offset_block(build_origin, 0, -1, 0)
 
 
-def upward_scaffold(count: int, contains_snow: bool) -> None:
+def upward_scaffold(count: int, contains_snow: bool, build_origin: XYZ) -> None:
     logger.write_log(f"scaffold_up: {count}")
     ms.chat(f"#buildIgnoreExisting {str(not contains_snow).lower()}")
     ms.chat("#buildRepeat -2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
-    baritone_build("step_scaffold", ["~-3", "~", "0"])
+    baritone_build("step_scaffold", offset_block(build_origin, -1, 0, 0))
     reset_settings()
 
 

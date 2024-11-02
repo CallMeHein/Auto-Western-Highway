@@ -46,4 +46,3 @@ This is still a WIP and should not be used without supervision. Baritone likes t
 
 - separate terminal window to log this script's decisions. The in-game chat is currently useless because of the flood of Baritone's logs.
   - allow the user to write commands which will be executed in the in-game chat? Depending on client/active modules, you may not have full control over the in-game chat.
-- no longer depend on #goto and #build with relative coordinates. Instead, keep track of the latest highway coordinates and work with those. Should reduce Baritone getting stuck
