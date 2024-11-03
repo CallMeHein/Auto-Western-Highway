@@ -4,7 +4,7 @@ from typing import List
 import system.lib.minescript as ms
 from const import MAX_RAY_STEPS, FUTURE_STEPS
 from logger import logger
-from utils.is_snow import is_snow
+from utils.is_non_full_block import is_non_full_block
 from utils.reset_settings import reset_settings
 from type_annotations import XYZ
 from utils.baritone_build import baritone_build
@@ -21,9 +21,9 @@ def step_down(count: int, build_origin: XYZ) -> XYZ:
     return offset_block(build_origin, 0, -1, 0)
 
 
-def downward_scaffold(count: int, contains_snow: bool, build_origin: XYZ) -> None:
+def downward_scaffold(count: int, contains_non_full_block: bool, build_origin: XYZ) -> None:
     logger.write_log(f"scaffold_down: {count}")
-    ms.chat(f"#buildIgnoreExisting {str(not contains_snow).lower()}")
+    ms.chat(f"#buildIgnoreExisting {str(not contains_non_full_block).lower()}")
     ms.chat("#buildRepeat 2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
     baritone_build("step_scaffold", offset_block(build_origin, -2 * count, -count, 0))
@@ -32,7 +32,7 @@ def downward_scaffold(count: int, contains_snow: bool, build_origin: XYZ) -> Non
 
 def get_step_down_height(standing_block: XYZ) -> tuple[int, bool]:
     ray_up_blocks = ms.getblocklist(get_down_ray_blocks(standing_block))
-    contains_snow = any([is_snow(block) for block in ray_up_blocks])
+    contains_non_full_block = any([is_non_full_block(block) for block in ray_up_blocks])
     step_down_height = 0
     for step_count in range(MAX_RAY_STEPS):
         blocks = [
@@ -46,7 +46,7 @@ def get_step_down_height(standing_block: XYZ) -> tuple[int, bool]:
             step_down_height += 1
         else:
             break
-    return step_down_height, contains_snow
+    return step_down_height, contains_non_full_block
 
 
 def get_future_step_down_length(standing_block: XYZ, step_up_height: int) -> int:

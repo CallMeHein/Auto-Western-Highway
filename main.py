@@ -27,22 +27,22 @@ def auto_highway() -> None:
     standing_block = get_standing_block()
     standing_block[2] = 0
     while not const.FULL_STOP:
-        step_up_height, contains_snow = get_step_up_height(standing_block)
+        step_up_height, contains_non_full_block = get_step_up_height(standing_block)
         if step_up_height >= STEP_HEIGHT_MIN:
             future_step_down_length = get_future_step_down_length(standing_block, step_up_height)
             if future_step_down_length:
                 standing_block = step(standing_block, future_step_down_length)
                 continue
-            upward_scaffold(step_up_height, contains_snow, copy.copy(standing_block))
+            upward_scaffold(step_up_height, contains_non_full_block, copy.copy(standing_block))
             standing_block = step_up(step_up_height, standing_block)
             continue
-        step_down_height, contains_snow = get_step_down_height(standing_block)
+        step_down_height, contains_non_full_block = get_step_down_height(standing_block)
         if step_down_height >= STEP_HEIGHT_MIN:
             future_step_up_length = get_future_step_up_length(standing_block, step_down_height)
             if future_step_up_length:
                 standing_block = step(standing_block, future_step_up_length)
                 continue
-            downward_scaffold(step_down_height, contains_snow, copy.copy(standing_block))
+            downward_scaffold(step_down_height, contains_non_full_block, copy.copy(standing_block))
             standing_block = step_down(step_down_height, standing_block)
             continue
         standing_block = step(standing_block)
