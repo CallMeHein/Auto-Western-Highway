@@ -1,14 +1,15 @@
 import copy
 import const
+import system.lib.minescript as ms
 from const import STEP_HEIGHT_MIN
 from down import get_step_down_height, downward_scaffold, step_down, get_future_step_down_length
 from logger import logger
-from utils.reset_settings import reset_settings
 from type_annotations import XYZ
 from up import get_step_up_height, upward_scaffold, step_up, get_future_step_up_length
 from utils.baritone_build import baritone_build
 from utils.get_standing_block import get_standing_block
 from utils.offset_block import offset_block
+from utils.reset_settings import reset_settings
 
 # import pydevd_pycharm
 # pydevd_pycharm.settrace('localhost', port=5678, stdoutToServer=True, stderrToServer=True, suspend=False)
@@ -23,6 +24,9 @@ def step(build_origin: XYZ, count=1) -> XYZ:
 
 
 def auto_highway() -> None:
+    for minescript_job in list(reversed(sorted(ms.job_info(), key=lambda job: job.command)))[:-1]:
+        ms.echo(minescript_job)
+        ms.execute(f"\\killjob {minescript_job.job_id}")
     reset_settings()
     standing_block = get_standing_block()
     standing_block[2] = 0
