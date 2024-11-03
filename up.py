@@ -26,7 +26,7 @@ def upward_scaffold(count: int, contains_non_full_block: bool, build_origin: XYZ
     ms.chat(f"#buildIgnoreExisting {str(not contains_non_full_block).lower()}")
     ms.chat("#buildRepeat -2,1,0")
     ms.chat(f"#buildRepeatCount {count}")
-    baritone_build("step_scaffold", offset_block(build_origin, -1, 0, 0))
+    baritone_build("step_scaffold", offset_block(build_origin, -3, 1, 0))
     reset_settings()
 
 
