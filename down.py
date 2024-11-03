@@ -17,7 +17,7 @@ def step_down(count: int, build_origin: XYZ) -> XYZ:
     build_origin = offset_block(build_origin, 0, 1, 0)
     for _ in range(count):
         baritone_build("step_down", offset_block(build_origin, -1, -1, -1))
-        baritone_build("step_down_2", offset_block(build_origin, -2, -2, -1))
+        baritone_build("step", offset_block(build_origin, -2, -2, -1))
         build_origin = offset_block(build_origin, -2, -1, 0)
     return offset_block(build_origin, 0, -1, 0)
 
