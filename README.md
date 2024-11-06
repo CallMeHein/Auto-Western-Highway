@@ -30,8 +30,13 @@ This is still a WIP and should not be used without supervision. Baritone likes t
 - use `\auto_highway\main`
 
 ### Troubleshooting
-Some baritone settings may affect performance or cause the script to get stuck:
-- blockReachDistance may be too low, increase it (recommended: 4.5)
+Some baritone settings may affect performance or cause the script to get stuck
+
+#### Gets stuck while placing blocks:
+- blockReachDistance may be too low
+
+#### Gets stuck while breaking blocks:
+- blockBreakSpeed may be too low
 
 ## Debugging
 
