@@ -2,6 +2,7 @@ __partial_block_names = [
     "_grass",
     "_log",
     "air",
+    "azure",
     "cactus",
     "dandelion"
     "dead_bush",
