@@ -29,6 +29,10 @@ This is still a WIP and should not be used without supervision. Baritone likes t
   - Dirt
 - use `\auto_highway\main`
 
+### Troubleshooting
+Some baritone settings may affect performance or cause the script to get stuck:
+- blockReachDistance may be too low, increase it (recommended: 4.5)
+
 ## Debugging
 
 ### PyCharm
@@ -44,5 +48,6 @@ This is still a WIP and should not be used without supervision. Baritone likes t
 
 ## TODOs
 
+- when scaffolding down, build out a support to ensure that the first step does not get stuck (like it currently does on water)
 - separate terminal window to log this script's decisions. The in-game chat is currently useless because of the flood of Baritone's logs.
   - allow the user to write commands which will be executed in the in-game chat? Depending on client/active modules, you may not have full control over the in-game chat.
