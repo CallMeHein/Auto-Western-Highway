@@ -3,14 +3,18 @@ __partial_block_names = [
     "_log",
     "air",
     "cactus",
+    "dandelion"
     "dead_bush",
     "fern",
+    "flower",
     "leaves",
     "lily_pad",
     "nether",
     "obsidian",
+    "poppy",
     "portal",
-    "vine"
+    "rose",
+    "vine",
 ]
 
 
