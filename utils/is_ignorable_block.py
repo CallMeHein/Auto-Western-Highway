@@ -10,6 +10,7 @@ __partial_block_names = [
     "flower",
     "leaves",
     "lily_pad",
+    "mushroom",
     "nether",
     "obsidian",
     "poppy",
