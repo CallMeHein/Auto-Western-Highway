@@ -15,6 +15,7 @@ __partial_block_names = [
     "poppy",
     "portal",
     "rose",
+    "torch",
     "vine",
 ]
 
