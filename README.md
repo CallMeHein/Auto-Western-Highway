@@ -1,3 +1,5 @@
+# WE HAVE MOVED TO A STANDALONE FABRIC MOD: https://github.com/CallMeHein/Auto-Western-Highway-Fabric
+
 # Auto Western Highway
 
 A script to automatically expand the western overworld highway (-X) on 2b2t
